@@ -69,6 +69,16 @@ class LoginPage extends StatelessWidget {
               ),
               child: Text('Iniciar Sesión'),
             ),
+            SizedBox(height: 16),
+            TextButton(
+              onPressed: () {
+                print('Botón de Registro presionado');
+              },
+              child: Text(
+                '¿No tienes una cuenta? Regístrate aquí',
+                style: TextStyle(color: Colors.green),
+              ),
+            ),
           ],
         ),
       ),
