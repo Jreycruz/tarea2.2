@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -17,12 +17,12 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
+              controller: usernameController,
+              keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                labelText: 'Correo electrónico',
+                labelText: 'Nombre de usuario',
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.email),
+                prefixIcon: Icon(Icons.person),
               ),
             ),
             SizedBox(height: 16),
@@ -38,7 +38,14 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+                String username = usernameController.text;
+                String password = passwordController.text;
+                if (username.isNotEmpty && password.isNotEmpty) {
+                  print('Usuario: $username, Contraseña: $password');
+                  Navigator.pushNamed(context, '/home');
+                } else {
+                  print('Por favor, completa todos los campos');
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
