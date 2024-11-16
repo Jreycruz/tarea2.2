@@ -77,8 +77,19 @@ class RegisterPage extends StatelessWidget {
                 String confirmPassword = confirmPasswordController.text;
 
                 if (password != confirmPassword) {
-                  print("Las contraseñas no coinciden");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Las contraseñas no coinciden'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
                 } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Registro exitoso'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
                   print("Nombre: $name");
                   print("Correo: $email");
                   print("Teléfono: $phone");
