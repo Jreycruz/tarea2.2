@@ -69,7 +69,19 @@ class RegisterPage extends StatelessWidget {
             ),
             SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                String name = nameController.text;
+                String email = emailController.text;
+                String phone = phoneController.text;
+                String password = passwordController.text;
+                String confirmPassword = confirmPasswordController.text;
+
+                print("Nombre: $name");
+                print("Correo: $email");
+                print("Teléfono: $phone");
+                print("Contraseña: $password");
+                print("Confirmar Contraseña: $confirmPassword");
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 foregroundColor: Colors.white,
