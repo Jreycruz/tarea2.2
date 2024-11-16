@@ -76,11 +76,15 @@ class RegisterPage extends StatelessWidget {
                 String password = passwordController.text;
                 String confirmPassword = confirmPasswordController.text;
 
-                print("Nombre: $name");
-                print("Correo: $email");
-                print("Teléfono: $phone");
-                print("Contraseña: $password");
-                print("Confirmar Contraseña: $confirmPassword");
+                if (password != confirmPassword) {
+                  print("Las contraseñas no coinciden");
+                } else {
+                  print("Nombre: $name");
+                  print("Correo: $email");
+                  print("Teléfono: $phone");
+                  print("Contraseña: $password");
+                  print("Confirmar Contraseña: $confirmPassword");
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
