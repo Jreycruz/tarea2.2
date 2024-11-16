@@ -4,6 +4,9 @@ class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final String validUsername = "jlreyesc@unah.hn";
+  final String validPassword = "20182001662";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,13 +41,27 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                String username = usernameController.text;
-                String password = passwordController.text;
-                if (username.isNotEmpty && password.isNotEmpty) {
-                  print('Usuario: $username, Contraseña: $password');
+                String username = usernameController.text.trim();
+                String password = passwordController.text.trim();
+
+                if (username == validUsername && password == validPassword) {
                   Navigator.pushNamed(context, '/home');
                 } else {
-                  print('Por favor, completa todos los campos');
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Error'),
+                      content: Text('Nombre de usuario o contraseña incorrectos'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Aceptar'),
+                        ),
+                      ],
+                    ),
+                  );
                 }
               },
               style: ElevatedButton.styleFrom(
