@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+  final String username;
+
+  HomePage({required this.username});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,8 +14,8 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'Pantalla de Inicio',
-          style: TextStyle(fontSize: 18, color: Colors.grey),
+          '¡Bienvenido, $username!',
+          style: TextStyle(fontSize: 24),
         ),
       ),
     );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
@@ -45,7 +47,12 @@ class LoginPage extends StatelessWidget {
                 String password = passwordController.text.trim();
 
                 if (username == validUsername && password == validPassword) {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(username: username),
+                    ),
+                  );
                 } else {
                   showDialog(
                     context: context,
