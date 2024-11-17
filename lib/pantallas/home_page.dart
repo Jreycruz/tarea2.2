@@ -9,15 +9,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Inicio')),
+        title: Center(child: Text('Bienvenido')),
         backgroundColor: Colors.green,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Text(
-          '¡Bienvenido, $username!',
+          'Bienvenido, $username',
           style: TextStyle(fontSize: 24),
         ),
       ),
     );
   }
 }
+

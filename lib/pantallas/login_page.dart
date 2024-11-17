@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -58,7 +59,12 @@ class _LoginPageState extends State<LoginPage> {
                 String password = passwordController.text;
 
                 if (username == "jlreyesc@unah.hn" && password == "20182001662") {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(username: username),
+                    ),
+                  );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
