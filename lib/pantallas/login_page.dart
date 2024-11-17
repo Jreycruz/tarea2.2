@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'home_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  final String validUsername = "jlreyesc@unah.hn";
-  final String validPassword = "20182001662";
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Inicio de Sesión')),
+        title: Center(child: Text('Iniciar Sesión')),
         backgroundColor: Colors.green,
       ),
       body: Padding(
@@ -23,9 +24,8 @@ class LoginPage extends StatelessWidget {
           children: [
             TextField(
               controller: usernameController,
-              keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                labelText: 'Nombre de usuario',
+                labelText: 'Nombre de Usuario',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.person),
               ),
@@ -33,40 +33,37 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 16),
             TextField(
               controller: passwordController,
-              obscureText: true,
+              obscureText: !_isPasswordVisible,
               decoration: InputDecoration(
                 labelText: 'Contraseña',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.lock),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
               ),
             ),
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                String username = usernameController.text.trim();
-                String password = passwordController.text.trim();
+                String username = usernameController.text;
+                String password = passwordController.text;
 
-                if (username == validUsername && password == validPassword) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(username: username),
-                    ),
-                  );
+                if (username == "jlreyesc@unah.hn" && password == "20182001662") {
+                  Navigator.pushNamed(context, '/home');
                 } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: Text('Error'),
-                      content: Text('Nombre de usuario o contraseña incorrectos'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text('Aceptar'),
-                        ),
-                      ],
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Usuario o contraseña incorrectos'),
+                      backgroundColor: Colors.red,
                     ),
                   );
                 }
@@ -77,17 +74,14 @@ class LoginPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 textStyle: TextStyle(fontSize: 16),
               ),
-              child: Text('Iniciar Sesión'),
+              child: Text('Iniciar sesión'),
             ),
             SizedBox(height: 16),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
               },
-              child: Text(
-                '¿No tienes una cuenta? Regístrate aquí',
-                style: TextStyle(color: Colors.green),
-              ),
+              child: Text('¿No tienes cuenta? Regístrate'),
             ),
           ],
         ),
