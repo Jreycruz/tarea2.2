@@ -76,7 +76,14 @@ class RegisterPage extends StatelessWidget {
                 String password = passwordController.text;
                 String confirmPassword = confirmPasswordController.text;
 
-                if (!validatePassword(password)) {
+                if (!validateName(name)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('El nombre debe tener entre 3 y 10 caracteres'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                } else if (!validatePassword(password)) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('La contraseña debe tener al menos 8 caracteres, una mayúscula y un carácter especial'),
@@ -130,6 +137,10 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool validateName(String name) {
+    return name.length >= 3 && name.length <= 10;
   }
 
   bool validatePassword(String password) {
