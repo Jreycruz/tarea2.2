@@ -97,6 +97,13 @@ class RegisterPage extends StatelessWidget {
                       backgroundColor: Colors.red,
                     ),
                   );
+                } else if (!validateEmail(email)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('El correo debe ser válido y finalizar con @unah.edu.hn o @unah.hn'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -134,5 +141,10 @@ class RegisterPage extends StatelessWidget {
   bool validatePhone(String phone) {
     final phoneRegex = RegExp(r'^[39][0-9]{7}$');
     return phoneRegex.hasMatch(phone);
+  }
+
+  bool validateEmail(String email) {
+    final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@unah\.(edu\.hn|hn)$');
+    return emailRegex.hasMatch(email);
   }
 }
