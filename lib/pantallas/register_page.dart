@@ -76,7 +76,14 @@ class RegisterPage extends StatelessWidget {
                 String password = passwordController.text;
                 String confirmPassword = confirmPasswordController.text;
 
-                if (password != confirmPassword) {
+                if (!validatePassword(password)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('La contraseña debe tener al menos 8 caracteres, una mayúscula y un carácter especial'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                } else if (password != confirmPassword) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Las contraseñas no coinciden'),
@@ -109,5 +116,11 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool validatePassword(String password) {
+    final passwordRegex =
+        RegExp(r'^(?=.*[A-Z])(?=.*[!@#\$&*~])(?=.*[a-zA-Z0-9]).{8,}$');
+    return passwordRegex.hasMatch(password);
   }
 }
