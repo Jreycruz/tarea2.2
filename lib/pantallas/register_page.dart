@@ -90,6 +90,13 @@ class RegisterPage extends StatelessWidget {
                       backgroundColor: Colors.red,
                     ),
                   );
+                } else if (!validatePhone(phone)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('El teléfono debe iniciar con 3 o 9 y tener exactamente 8 números'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -122,5 +129,10 @@ class RegisterPage extends StatelessWidget {
     final passwordRegex =
         RegExp(r'^(?=.*[A-Z])(?=.*[!@#\$&*~])(?=.*[a-zA-Z0-9]).{8,}$');
     return passwordRegex.hasMatch(password);
+  }
+
+  bool validatePhone(String phone) {
+    final phoneRegex = RegExp(r'^[39][0-9]{7}$');
+    return phoneRegex.hasMatch(phone);
   }
 }
